@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
 import {createStore} from 'redux';
-import {Provider} from 'react-redux'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {Provider} from 'react-redux';
+import {BrowserRouter, Route} from 'react-router-dom';
 
-import counterAppReducer from '../reducers/counter-app';
-const store = createStore(counterAppReducer);
+import categoryApp from '../reducers/cat-app.js'
+import Dashboard from './dashboard.js';
 
-import Dashboard from './Dashboard';
+const store = createStore(categoryApp);
 
 class App extends React.Component {
   render() {
     return (
-			<Provider store={store}>
-				<BrowserRouter>
-					<Route exact path='/' component={Dashboard}/>
-				</BrowserRouter>
-			</Provider>
+      <Provider store={store}>
+      <BrowserRouter>
+        <Route exact path='/' component={Dashboard} />
+      </BrowserRouter>
+      </Provider>
     )
   }
 }
 
-export default App
+export default App;
