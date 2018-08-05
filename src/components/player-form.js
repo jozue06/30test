@@ -1,20 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-  categoryCreate,
-  categoryUpdate,
-} from '../actions/cat-actions.js';
+  playerCreate,
+  playerUpdate,
+} from '../actions/player-actions.js';
 
-class CatForm extends React.Component {
+class PlayerForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      budget: 0,
+      position: 0,
       isEditing: false,
     }
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleBudgetChange = this.handleBudgetChange.bind(this);
+    this.handlePositionChange = this.handlePositionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,9 +25,9 @@ class CatForm extends React.Component {
     this.setState(newState);
   }
 
-  handleBudgetChange(event) {
+  handlePositionChange(event) {
     let newState = {
-      budget: event.target.value
+      position: event.target.value
     }
     this.setState(newState);
   }
@@ -36,10 +36,10 @@ class CatForm extends React.Component {
     let submitFormName = this.props.name;
     event.preventDefault();
     if (this.props.name === 'create') {
-      this.props.categoryCreate(this.state);
+      this.props.playerCreate(this.state);
     } else if (this.props.name === 'update') {
       let newValue = Object.assign(this.state, {isEditing: false, id: this.props.id});
-      this.props.categoryUpdate(this.state);
+      this.props.playerUpdate(this.state);
     }
   }
 
@@ -47,8 +47,8 @@ class CatForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleNameChange} type="text" placeholder="category name" required="true"/>
-        <input onChange={this.handleBudgetChange} name="budget" type="text" placeholder="budget amount" required="true"/>
+        <input onChange={this.handleNameChange} type="text" placeholder="player name" required="true"/>
+        <input onChange={this.handlePositionChange} name="position" type="text" placeholder="player position" required="true"/>
         <button type="submit">Submit</button>
       </form>
     )
@@ -56,14 +56,14 @@ class CatForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories
+  players: state.players
 });
 
 const mapDispatchToProps = (dispatch, getState) => {
   return {
-    categoryCreate: val => dispatch(categoryCreate(val)),
-    categoryUpdate: val => dispatch(categoryUpdate(val)),
+    playerCreate: val => dispatch(playerCreate(val)),
+    playerUpdate: val => dispatch(playerUpdate(val)),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CatForm);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerForm);

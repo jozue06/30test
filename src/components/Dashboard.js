@@ -1,34 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-  categoryCreate,
-  categoryUpdate,
-  categoryDestroy,
-} from '../actions/cat-actions.js';
+  playerCreate,
+  playerUpdate,
+  playerDestroy,
+} from '../actions/player-actions.js';
 
-import CatList from './cat-list.js';
-import CatForm from './cat-form.js';
+import PlayerList from './player-list.js';
+import PlayerForm from './player-form.js';
 
 class Dashboard extends React.Component {
   render() {
     return <div>
-      <h1>Manage Your Budget</h1>
-      <h2>Create A Category:</h2>
-      <CatForm name="create"></CatForm>
-      <CatList></CatList>
+      <h1>Ping Pong Leader Board</h1>
+      <h2>Add a Player Name and Position</h2>
+      <PlayerForm name="create"></PlayerForm>
+      <PlayerList />
     </div>
   }
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories,
+  players: state.players,
 });
 
 const mapDispatchToProps = (dispatch, getState) => {
   return {
-    categoryCreate: () => dispatch(categoryCreate()),
-    categoryUpdate: values => dispatch(categoryUpdate(values)),
-    categoryDestroy: id => dispatch(categoryDestroy(id)),
+    playerCreate: () => dispatch(playerCreate()),
+    playerUpdate: values => dispatch(playerUpdate(values)),
+    playerDestroy: id => dispatch(playerDestroy(id)),
   }
 }
 
